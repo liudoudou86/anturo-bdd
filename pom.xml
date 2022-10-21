@@ -19,54 +19,44 @@
     </developers>
 
     <properties>
-        <java.version>1.8</java.version>
+        <!-- Base -->
+        <java.version>8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Allure -->
-        <allure.version>2.10.0</allure.version>
-        <allure.report.host>localhost</allure.report.host>
-        <allure.report.port>15000</allure.report.port>
-        <allure.report.endpoint>/allure</allure.report.endpoint>
+        <!-- BDD -->
+        <cucumber.version>5.5.0</cucumber.version>
+        <serenity.version>2.2.0</serenity.version>
+        <serenity.maven.version>2.2.0</serenity.maven.version>
+        <serenity.cucumber.version>2.2.0</serenity.cucumber.version>
+        <serenity.report.host>localhost</serenity.report.host>
+        <serenity.report.port>3000</serenity.report.port>
+        <serenity.report.endpoint>/bdd</serenity.report.endpoint>
 
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+
+        <!-- 日志工具包 -->
         <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>5.2.0</version>
-            <scope>test</scope>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.1</version>
         </dependency>
 
-        <!-- use to parse json document -->
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-path -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-path</artifactId>
-            <version>5.2.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
-        <!-- validate a json response conforms to a Json schema -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>5.2.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/xml-path -->
-        <!-- use to parse xml document -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>xml-path</artifactId>
-            <version>5.2.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <!-- 测试工具包 -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -74,35 +64,107 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/java-hamcrest -->
-        <!-- match rules in assertion -->
+        <!-- BDD工具包 -->
         <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>java-hamcrest</artifactId>
-            <version>2.0.0.0</version>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+        <!-- BDD工具包 报告工具包 -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>${serenity.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>cucumber-core</artifactId>
+                </exclusion>
+            </exclusions>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>6.8.1</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber5</artifactId>
+            <version>${serenity.cucumber.version}</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>6.8.1</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-rest-assured</artifactId>
+            <version>${serenity.version}</version>
         </dependency>
-
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-
 
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>anturo-bdd</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>2.22.1</version>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <skipITs>false</skipITs>
+                            <testFailureIgnore>true</testFailureIgnore>
+                            <failIfNoTests>true</failIfNoTests>
+                            <failIfNoSpecifiedTests>true</failIfNoSpecifiedTests>
+                            <includes>
+                                <include>com.qa.demo.runner.*Runner</include>
+                            </includes>
+                            <argLine>
+                                -Dcucumber.options="--plugin io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+                            </argLine>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-bdd-test</id>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.serenity-bdd.maven.plugins</groupId>
+                        <artifactId>serenity-maven-plugin</artifactId>
+                        <version>${serenity.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>net.serenity-bdd</groupId>
+                                <artifactId>serenity-single-page-report</artifactId>
+                                <version>${serenity.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <reports>single-page-html</reports>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>to-serenity-reports</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
