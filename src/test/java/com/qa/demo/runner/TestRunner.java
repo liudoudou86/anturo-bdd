@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Tesla Liu
  * @date 2022/10/18 17:51
- * 描述 BDD运行器
+ * 描述 BDD 入口
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(

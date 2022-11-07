@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author Tesla Liu
  * @date 2022/10/18 18:02
- * 描述 BDD测试用例
+ * 描述 BDD 测试用例
  */
 
 @Slf4j
