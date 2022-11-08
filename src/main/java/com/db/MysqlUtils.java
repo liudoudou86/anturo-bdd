@@ -1,6 +1,9 @@
 package com.db;
 
-import java.io.IOException;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
+import java.io.*;
 import java.sql.*;
 import java.util.Properties;
 
@@ -48,6 +51,22 @@ public class MysqlUtils {
             e.printStackTrace();
         }
         return connection;
+    }
+
+    /**
+     * 调用mybetis执行sql脚本
+     * @param sqlpath sql脚本路径
+     * */
+    public static void sqlScript(String sqlpath) {
+        Connection conn = MysqlUtils.getConnection();
+        ScriptRunner runner = new ScriptRunner(conn);
+        try {
+            runner.runScript(Resources.getResourceAsReader(sqlpath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
     }
 
 

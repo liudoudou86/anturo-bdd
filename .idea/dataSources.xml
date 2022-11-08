@@ -18,5 +18,15 @@
       <jdbc-url>jdbc:mysql://10.9.8.97:3306/b2bstg</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="测试临时库" uuid="c0e244a9-5e07-4ef2-91bc-6132726c66b6">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://10.6.3.13:12000/tasly-center-credit</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+      <driver-properties>
+        <property name="useSSL" value="no" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

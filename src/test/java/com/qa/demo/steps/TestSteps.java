@@ -3,16 +3,6 @@ package com.qa.demo.steps;
 import com.db.MysqlUtils;
 import io.cucumber.java8.En;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.io.File;
-import java.net.URLDecoder;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Tesla Liu
@@ -28,7 +18,11 @@ public class TestSteps implements En {
     }
 
     public void testcase() {
-        Given("Visit Baidu website",()-> log.info("登录百度一下"));
+        Given("Visit Baidu website",()-> {
+            deleteDate();
+            insertDate();
+            log.info("登录百度一下");
+        });
         When("Input {string}",(String string)-> log.info("输入" + string));
         Then("Should be to see the {string}",(String string)-> log.info("可以看到" + string));
     }
@@ -37,11 +31,7 @@ public class TestSteps implements En {
      * 清理历史数据
      * */
     public void deleteDate() throws Exception {
-        String SQL_PATH = URLDecoder.decode(ClassLoader.getSystemResource("scripts/【清理历史数据】.sql").getPath(), "UTF-8");
-        List<String> SQLS = Arrays.stream(FileUtils.readFileToString(new File(SQL_PATH), Charset.defaultCharset()).trim().split(";"))
-                .map(String::trim).collect(Collectors.toList());
-        List<Pair<String, Integer>> flags = new ArrayList<>();
-        SQLS.forEach(sql -> flags.add(Pair.of(sql, MysqlUtils.myUpdate(sql))));
+        MysqlUtils.sqlScript("scripts/【清理历史数据】.sql");
         log.info("清理历史数据已完成");
     }
 
@@ -49,11 +39,7 @@ public class TestSteps implements En {
      * 清理历史数据
      * */
     public void insertDate() throws Exception {
-        String SQL_PATH = URLDecoder.decode(ClassLoader.getSystemResource("scripts/【添加测试数据】.sql").getPath(), "UTF-8");
-        List<String> SQLS = Arrays.stream(FileUtils.readFileToString(new File(SQL_PATH), Charset.defaultCharset()).trim().split(";"))
-                .map(String::trim).collect(Collectors.toList());
-        List<Pair<String, Integer>> flags = new ArrayList<>();
-        SQLS.forEach(sql -> flags.add(Pair.of(sql, MysqlUtils.myUpdate(sql))));
+        MysqlUtils.sqlScript("scripts/【添加测试数据】.sql");
         log.info("添加测试数据已完成");
     }
 }
