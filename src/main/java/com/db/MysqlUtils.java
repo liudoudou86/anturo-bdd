@@ -9,7 +9,7 @@ import java.util.Properties;
  * @date 2022/11/07 14:13
  * 描述 jdbc工具类
  */
-public class DbUtils {
+public class MysqlUtils {
     public static Connection conn = null;
     public static PreparedStatement statement = null;
     public static ResultSet resultSet = null;
@@ -24,7 +24,7 @@ public class DbUtils {
         try {
             Properties properties = new Properties();
             // 加载配置文件   通过类加载器
-            properties.load(DbUtils.class.getClassLoader().getResourceAsStream("mysql.properties"));
+            properties.load(MysqlUtils.class.getClassLoader().getResourceAsStream("mysql.properties"));
             driver=properties.getProperty("driver");
             url=properties.getProperty("url");
             user=properties.getProperty("username");
@@ -102,9 +102,9 @@ public class DbUtils {
     public static int myUpdate(String sql,Object...ob){
         PreparedStatement statement = getStatement(sql, ob);
         //执行成功的条数
-        int count=0;
+        int count = 0;
         try {
-            count=statement.executeUpdate();
+            count = statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

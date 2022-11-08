@@ -1,6 +1,6 @@
 package com.qa.demo.steps;
 
-import com.db.DbUtils;
+import com.db.MysqlUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -50,7 +50,7 @@ public class TestSteps {
         List<String> SQLS = Arrays.stream(FileUtils.readFileToString(new File(SQL_PATH), Charset.defaultCharset()).trim().split(";"))
                 .map(String::trim).collect(Collectors.toList());
         List<Pair<String, Integer>> flags = new ArrayList<>();
-        SQLS.forEach(sql -> flags.add(Pair.of(sql, DbUtils.myUpdate(sql))));
+        SQLS.forEach(sql -> flags.add(Pair.of(sql, MysqlUtils.myUpdate(sql))));
         log.info("清理历史数据已完成");
     }
 
@@ -62,7 +62,7 @@ public class TestSteps {
         List<String> SQLS = Arrays.stream(FileUtils.readFileToString(new File(SQL_PATH), Charset.defaultCharset()).trim().split(";"))
                 .map(String::trim).collect(Collectors.toList());
         List<Pair<String, Integer>> flags = new ArrayList<>();
-        SQLS.forEach(sql -> flags.add(Pair.of(sql, DbUtils.myUpdate(sql))));
+        SQLS.forEach(sql -> flags.add(Pair.of(sql, MysqlUtils.myUpdate(sql))));
         log.info("添加测试数据已完成");
     }
 }

@@ -107,7 +107,6 @@
             <artifactId>serenity-rest-assured</artifactId>
             <version>${serenity.version}</version>
         </dependency>
-
     </dependencies>
 
     <profiles>
