@@ -1,9 +1,7 @@
 package com.qa.demo.steps;
 
 import com.db.MysqlUtils;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java8.En;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -23,23 +21,16 @@ import java.util.stream.Collectors;
  */
 
 @Slf4j
-public class TestSteps {
+public class TestSteps implements En {
 
-    @Given("Visit Baidu website")
-    public void visitBaiduWebsite() throws Exception {
-        deleteDate();
-        insertDate();
-        log.info("登录百度一下");
+    public TestSteps() {
+        this.testcase();
     }
 
-    @When("Input {string}")
-    public void input(String string) {
-        log.info("输入" + string);
-    }
-
-    @Then("Should be to see the {string}")
-    public void shouldBeToSeeThe(String string) {
-        log.info("可以看到" + string);
+    public void testcase() {
+        Given("Visit Baidu website",()-> log.info("登录百度一下"));
+        When("Input {string}",(String string)-> log.info("输入" + string));
+        Then("Should be to see the {string}",(String string)-> log.info("可以看到" + string));
     }
 
     /**
