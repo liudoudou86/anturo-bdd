@@ -54,7 +54,7 @@ public class MysqlUtils {
     }
 
     /**
-     * 调用mybetis执行sql脚本
+     * 调用mybatis执行sql脚本
      * @param sqlpath sql脚本路径
      * */
     public static void sqlScript(String sqlpath) {
@@ -102,7 +102,7 @@ public class MysqlUtils {
      * @param ob  可变参数
      * @return ResultSet结果集合
      */
-    public static ResultSet mySelect(String sql,Object...ob){
+    public static ResultSet sqlSelect(String sql,Object...ob){
         PreparedStatement statement = getStatement(sql, ob);
         try {
             resultSet = statement.executeQuery();
@@ -118,7 +118,7 @@ public class MysqlUtils {
      * @param ob  可变参数
      * @return 操作完成的sql语句数量
      */
-    public static int myUpdate(String sql,Object...ob){
+    public static int sqlUpdate(String sql,Object...ob){
         PreparedStatement statement = getStatement(sql, ob);
         //执行成功的条数
         int count = 0;
