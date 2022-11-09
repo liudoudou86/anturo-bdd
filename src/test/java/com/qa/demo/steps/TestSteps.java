@@ -36,10 +36,10 @@ public class TestSteps implements En {
     }
 
     /**
-     * 清理历史数据
+     * 添加测试数据
      * */
     public void insertDate() throws Exception {
-        MysqlUtils.sqlScript("scripts/【仅占压超账期测试数据】.sql");
+        MysqlUtils.sqlScript("scripts/【仅年度资信无临时信用】.sql");
         log.info("添加测试数据已完成");
     }
 }
