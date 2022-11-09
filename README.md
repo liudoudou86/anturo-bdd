@@ -8,8 +8,10 @@
 
 ```
 src -- 父工程
-├── main/resourceslog4j2.xml --- 日志配置文件
-└── test -- 配置文件
+├── main
+     ├── java/com/db -- jdbc封装工具类
+     └── java/com/api -- 通用接口封装
+└── test -- 测试用例集
      ├── java/com/qa/demo
                 ├── runner --- BDD启动器
                 └── steps --- BDD用例逻辑代码
@@ -29,5 +31,5 @@ src -- 父工程
 | Hamcrest      | 断言工具
 | TestNG        | 测试框架
 | Serenity      | 测试报告
-| PyMysql       | 数据库处理工具
-| 部署方式          | Jenkins
+| Mybatis       | 数据库处理工具
+| 部署方式          | Gitlab
