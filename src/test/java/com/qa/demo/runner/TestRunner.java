@@ -11,10 +11,12 @@ import org.junit.runner.RunWith;
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
+        strict = true,
+        stepNotifications = true,
         features = "classpath:features/demo",
         glue = "com.qa.demo.steps",
         plugin = {"pretty", "json:target/cucumber-testng.json", "html:target/cucumber-report"},
-        tags = "not (@disable or @todo)"
+        tags = "not @test"
 )
 public class TestRunner {
 }

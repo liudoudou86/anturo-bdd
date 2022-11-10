@@ -1,9 +1,6 @@
-Feature: Baidu search
+Feature:百度搜索
 
-  Scenario Outline: Baidu search
-    Given Visit Baidu website
-    When Input "<content>"
-    Then Should be to see the "<content>"
-    Examples:
-      | content |
-      | BDD     |
+  Scenario:百度搜索测试
+    Given 访问百度一下网站
+    When 输入搜索词
+    Then 应该可以看到搜索词
