@@ -1,16 +1,16 @@
-package com.db;
+package com.qa.db;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.*;
+import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
 /**
  * @author Tesla Liu
  * @date 2022/11/07 14:13
- * 描述 jdbc工具类
+ * 描述 JDBC工具类
  */
 public class MysqlUtils {
     public static Connection conn = null;
@@ -20,8 +20,10 @@ public class MysqlUtils {
     public static String url = null;
     public static String user = null;
     public static  String pwd = null;
+
     /**
-     * 加载配置文件  初始化
+     * 加载配置文件
+     * 初始化
      */
     static {
         try {
@@ -54,23 +56,6 @@ public class MysqlUtils {
     }
 
     /**
-     * 调用mybatis执行sql脚本
-     * @param sqlpath sql脚本路径
-     * */
-    public static void sqlScript(String sqlpath) {
-        Connection conn = MysqlUtils.getConnection();
-        ScriptRunner runner = new ScriptRunner(conn);
-        try {
-            runner.runScript(Resources.getResourceAsReader(sqlpath));
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeAll();
-        }
-    }
-
-
-    /**
      * 获取操作数据库的对象
      * @param sql sql语句
      * @param ob  参数可变
@@ -96,11 +81,10 @@ public class MysqlUtils {
     }
 
     /**
-     * 查询
-     * 返回查询的结果集合
+     * 对数据库的查询
      * @param sql sql语句
      * @param ob  可变参数
-     * @return ResultSet结果集合
+     * @return ResultSet 返回结果集合
      */
     public static ResultSet sqlSelect(String sql,Object...ob){
         PreparedStatement statement = getStatement(sql, ob);
@@ -116,18 +100,32 @@ public class MysqlUtils {
      * 对数据库的增、删、改
      * @param sql sql语句
      * @param ob  可变参数
-     * @return 操作完成的sql语句数量
      */
-    public static int sqlUpdate(String sql,Object...ob){
+    public static void sqlUpdate(String sql, Object...ob){
         PreparedStatement statement = getStatement(sql, ob);
-        //执行成功的条数
-        int count = 0;
         try {
-            count = statement.executeUpdate();
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeAll();
         }
-        return count;
+    }
+
+    /**
+     * 调用mybatis执行sql脚本
+     * @param sqlpath sql脚本路径
+     */
+    public static void sqlScript(String sqlpath) {
+        Connection conn = MysqlUtils.getConnection();
+        ScriptRunner runner = new ScriptRunner(conn);
+        try {
+            runner.runScript(Resources.getResourceAsReader(sqlpath));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
     }
 
     /**
