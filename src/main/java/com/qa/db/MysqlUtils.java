@@ -22,34 +22,24 @@ public class MysqlUtils {
     public static  String pwd = null;
 
     /**
-     * 加载配置文件
-     * 初始化
+     * 加载配置文件&&初始化
+     * @param propertiesName 配置文件名
+     * @return 连接结果
      */
-    static {
+    public static Connection getConnection(String propertiesName){
+        Connection connection = null;
         try {
             Properties properties = new Properties();
             // 加载配置文件   通过类加载器
-            properties.load(MysqlUtils.class.getClassLoader().getResourceAsStream("mysql.properties"));
+            properties.load(MysqlUtils.class.getClassLoader().getResourceAsStream(propertiesName));
             driver=properties.getProperty("driver");
             url=properties.getProperty("url");
             user=properties.getProperty("username");
             pwd=properties.getProperty("password");
             // 加载驱动
             Class.forName(driver);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获得连接
-     * @return 连接结果
-     */
-    public static Connection getConnection(){
-        Connection connection = null;
-        try {
             connection = DriverManager.getConnection(url, user, pwd);
-        } catch (SQLException e) {
+        } catch (SQLException | IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return connection;
@@ -61,11 +51,11 @@ public class MysqlUtils {
      * @param ob  参数可变
      * @return PreparedStatement
      */
-    public static PreparedStatement getStatement(String sql,Object...ob){
+    public static PreparedStatement getStatement(String propertiesName, String sql,Object...ob){
         //加载驱动
         try {
             //创建连接对象
-            conn = getConnection();
+            conn = getConnection(propertiesName);
             //创建执行对象
             statement = conn.prepareStatement(sql);
             //如果有参数  则添加参数
@@ -86,8 +76,8 @@ public class MysqlUtils {
      * @param ob  可变参数
      * @return ResultSet 返回结果集合
      */
-    public static ResultSet sqlSelect(String sql,Object...ob){
-        PreparedStatement statement = getStatement(sql, ob);
+    public static ResultSet sqlSelect(String propertiesName, String sql,Object...ob){
+        PreparedStatement statement = getStatement(propertiesName, sql, ob);
         try {
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
@@ -101,8 +91,8 @@ public class MysqlUtils {
      * @param sql sql语句
      * @param ob  可变参数
      */
-    public static void sqlUpdate(String sql, Object...ob){
-        PreparedStatement statement = getStatement(sql, ob);
+    public static void sqlUpdate(String propertiesName, String sql, Object...ob){
+        PreparedStatement statement = getStatement(propertiesName, sql, ob);
         try {
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -116,8 +106,8 @@ public class MysqlUtils {
      * 调用mybatis执行sql脚本
      * @param sqlpath sql脚本路径
      */
-    public static void sqlScript(String sqlpath) {
-        Connection conn = MysqlUtils.getConnection();
+    public static void sqlScript(String propertiesName, String sqlpath) {
+        Connection conn = MysqlUtils.getConnection(propertiesName);
         ScriptRunner runner = new ScriptRunner(conn);
         try {
             runner.runScript(Resources.getResourceAsReader(sqlpath));
