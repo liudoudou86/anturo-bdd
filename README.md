@@ -9,27 +9,27 @@
 ```
 src -- 父工程
 ├── main
-     ├── java/com/db -- jdbc封装工具类
-     └── java/com/api -- 通用接口封装
+     └── java/com/qa/db -- jdbc封装工具类
 └── test -- 测试用例集
      ├── java/com/qa/demo
-                ├── runner --- BDD启动器
-                └── steps --- BDD用例逻辑代码
+            ├── runner --- BDD启动器
+            └── steps --- BDD用例集合
      └── resources
-            ├── features --- BDD用例
+            ├── features/demo --- BDD用例分解
+            ├── scripts --- sql脚本
             └── testng.xml --- testng配置文件
 ```
 
 #### 技术选型
 
-| 技术            | 说明
-|---------------| ---------------------------
-| Java 1.8      | 编程语言
-| Intellij IDEA | 开发工具
-| Serenity BDD  | BDD集成
-| RestAssured   | 接口请求工具
-| Hamcrest      | 断言工具
-| TestNG        | 测试框架
-| Serenity      | 测试报告
-| Mybatis       | 数据库处理工具
-| 部署方式          | Gitlab
+| 技术            | 说明      |
+|---------------|---------|
+| Java 1.8      | 编程语言    |
+| Intellij IDEA | 开发工具    |
+| Serenity BDD  | BDD集成   |
+| RestAssured   | 接口请求工具  |
+| Hamcrest      | 断言工具    |
+| TestNG        | 测试框架    |
+| Serenity      | 测试报告    |
+| Mybatis       | 数据库处理工具 |
+| 部署方式          | Gitlab  |
