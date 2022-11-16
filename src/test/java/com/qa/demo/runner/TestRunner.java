@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         features = "classpath:features/demo",
         glue = "com.qa.demo.steps",
         plugin = {"pretty", "json:target/cucumber-testng.json", "html:target/cucumber-report"},
-        tags = "not @test"
+        tags = "not @skip"
 )
 public class TestRunner {
 }
