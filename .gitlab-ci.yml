@@ -1,0 +1,14 @@
+image: harbor.dtyunxi.cn/library/yunxicibase:0.3.0
+
+stages:
+  - bdd
+
+bdd-test:
+  when: manual
+  stage: bdd
+  script:
+    - echo "starting bdd test"
+    - mvn clean integration-test -f pom.xml -U -P anturo-bdd
+  only:
+    - master
+  allow_failure: true
