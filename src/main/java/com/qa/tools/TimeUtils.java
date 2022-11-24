@@ -9,19 +9,36 @@ import java.util.Random;
  */
 public class TimeUtils {
 
-    public static Integer randTime(){
+    public static String randomTimeStyle01(){
         Random rndYear = new Random();
-        int year = rndYear.nextInt(18)+2000;
+        String year = String.valueOf(rndYear.nextInt(18)+2000);
         Random rndMonth = new Random();
-        int month = rndMonth.nextInt(12)+1;
+        String month = String.valueOf(rndMonth.nextInt(12)+1);
         Random rndDay = new Random();
-        int day = rndDay.nextInt(30)+1;
+        String day = String.valueOf(rndDay.nextInt(30)+1);
         Random rndHour = new Random();
-        int hour = rndHour.nextInt(23);
+        String hour = String.valueOf(rndHour.nextInt(23));
         Random rndMinute = new Random();
-        int minute = rndMinute.nextInt(60);
+        String minute = String.valueOf(rndMinute.nextInt(60));
         Random rndSecond = new Random();
-        int second = rndSecond.nextInt(60);
+        String second = String.valueOf(rndSecond.nextInt(60));
         return year + month + day + hour + minute + second;
     }
+
+    public static String randomTimeStyle02(){
+        Random rndYear = new Random();
+        String year = String.valueOf(rndYear.nextInt(18)+2000);
+        Random rndMonth = new Random();
+        String month = String.valueOf(rndMonth.nextInt(12)+1);
+        Random rndDay = new Random();
+        String day = String.valueOf(rndDay.nextInt(30)+1);
+        Random rndHour = new Random();
+        String hour = String.valueOf(rndHour.nextInt(23));
+        Random rndMinute = new Random();
+        String minute = String.valueOf(rndMinute.nextInt(60));
+        Random rndSecond = new Random();
+        String second = String.valueOf(rndSecond.nextInt(60));
+        return year + "-" + month + "-" + day + "  " + hour + ":" + minute + ":" + second;
+    }
+
 }
