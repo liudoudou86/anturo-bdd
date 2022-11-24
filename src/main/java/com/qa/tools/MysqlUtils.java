@@ -1,4 +1,4 @@
-package com.qa.db;
+package com.qa.tools;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
