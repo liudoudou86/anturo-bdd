@@ -144,33 +144,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>2.22.1</version>
-                        <configuration>
-                            <encoding>UTF-8</encoding>
-                            <skipITs>false</skipITs>
-                            <testFailureIgnore>true</testFailureIgnore>
-                            <failIfNoTests>true</failIfNoTests>
-                            <failIfNoSpecifiedTests>true</failIfNoSpecifiedTests>
-                            <includes>
-                                <include>com.qa.demo.runner.*Runner</include>
-                            </includes>
-                            <argLine>
-                                -Dcucumber.options="--plugin io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
-                            </argLine>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>start-bdd-test</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>net.serenity-bdd.maven.plugins</groupId>
                         <artifactId>serenity-maven-plugin</artifactId>
                         <version>${serenity.version}</version>
