@@ -1,6 +1,7 @@
 package com.qa.tools;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -84,6 +85,20 @@ public class TimeUtils {
     public static String currentTime() {
         Date date = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        return formater.format(date);
+    }
+
+    /**
+     * 获取上月的任意时间
+     * 格式为：yyyy-MM-dd
+     * */
+    public static String lastMonth() {
+        Date date = new Date();
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - 1);
+        date = calendar.getTime();
         return formater.format(date);
     }
 
