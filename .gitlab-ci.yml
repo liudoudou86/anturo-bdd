@@ -8,7 +8,7 @@ bdd-test:
   stage: bdd
   script:
     - echo "starting bdd test"
-    - mvn clean post-integration-test -f pom.xml -U -P anturo-bdd
+    - mvn clean post-integration-test -f pom.xml -U -P test-bdd
   only:
     - master
   allow_failure: true
