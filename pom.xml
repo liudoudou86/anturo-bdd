@@ -98,6 +98,11 @@
             <version>${cucumber.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>2.14.0</version>
+        </dependency>
+        <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
             <version>${serenity.version}</version>
