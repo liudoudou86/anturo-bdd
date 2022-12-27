@@ -1,11 +1,11 @@
 image: harbor.dtyunxi.cn/library/yunxicibase:0.3.0
 
 stages:
-  - bdd
+  - test
 
 bdd-test:
-  when: manual
-  stage: bdd
+  when: always
+  stage: test
   script:
     - echo "starting bdd test"
     - mvn clean post-integration-test -f pom.xml -U -P test-bdd

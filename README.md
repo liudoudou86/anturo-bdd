@@ -9,13 +9,15 @@
 ```
 src -- 父工程
 ├── main
-     └── java/com/qa/db -- jdbc封装工具类
+     └── java/com/qa/tools
+                       ├── MysqlUtils --- jdbc封装工具类
+                       └── TimeUtils --- 时间戳工具类
 └── test -- 测试用例集
      ├── java/com/qa/demo
             ├── runner --- BDD启动器
-            └── steps --- BDD用例集合
+            └── steps --- BDD用例集
      └── resources
-            ├── features/demo --- BDD用例分解
+            ├── features/demo --- 实例化需求
             ├── scripts --- sql脚本
             └── testng.xml --- testng配置文件
 ```
@@ -31,5 +33,5 @@ src -- 父工程
 | Hamcrest      | 断言工具    |
 | TestNG        | 测试框架    |
 | Serenity      | 测试报告    |
-| Mybatis       | 数据库处理工具 |
+| JDBC          | 数据库处理工具 |
 | 部署方式          | Gitlab  |
