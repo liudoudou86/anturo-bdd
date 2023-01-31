@@ -3,9 +3,7 @@ package com.qa.tools;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 /**
  * @author Tesla Liu
@@ -29,17 +27,14 @@ public class MysqlUtils {
     public static Connection getConnection(String propertiesName){
         Connection connection = null;
         try {
-            Properties properties = new Properties();
-            // 加载配置文件   通过类加载器
-            properties.load(MysqlUtils.class.getClassLoader().getResourceAsStream(propertiesName));
-            driver=properties.getProperty("driver");
-            url=properties.getProperty("url");
-            user=properties.getProperty("username");
-            pwd=properties.getProperty("password");
+            driver = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".driver"));
+            url = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".url"));
+            user = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".username"));
+            pwd = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".password"));
             // 加载驱动
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, pwd);
-        } catch (SQLException | IOException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return connection;

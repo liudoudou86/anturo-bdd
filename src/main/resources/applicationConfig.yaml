@@ -1,0 +1,6 @@
+DataBase:
+    mysql:
+        driver: com.mysql.jdbc.Driver
+        url:
+        username: root
+        password: root
