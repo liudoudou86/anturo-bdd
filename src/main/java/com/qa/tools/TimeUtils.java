@@ -1,5 +1,6 @@
 package com.qa.tools;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -86,6 +87,16 @@ public class TimeUtils {
         Date date = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         return formater.format(date);
+    }
+
+    /**
+     * 获取当前时间戳
+     * 格式为：1479249799770
+     * */
+    public static String currentTimeStamp() {
+        SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        return formater.format(timestamp);
     }
 
     /**
