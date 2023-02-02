@@ -1,4 +1,4 @@
-package com.qa.tools;
+package com.qa.tool;
 
 import lombok.extern.slf4j.Slf4j;
 import org.yaml.snakeyaml.Yaml;
@@ -13,18 +13,18 @@ import java.util.Map;
  * 描述 Yaml配置工具类
  */
 @Slf4j
-public class YamlUtils {
+public class YamlUtil {
 
     private static Map<String, Map<String, Object>> properties = new HashMap<>();
 
     /**
      * 加载配置文件&&初始化
      */
-    public static final YamlUtils INSTANCE = new YamlUtils();
+    public static final YamlUtil INSTANCE = new YamlUtil();
 
     static {
         Yaml yaml = new Yaml();
-        try (InputStream in = YamlUtils.class.getClassLoader().getResourceAsStream("applicationConfig.yaml")) {
+        try (InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream("applicationConfig.yaml")) {
             properties = yaml.loadAs(in, HashMap.class);
         } catch (Exception e) {
             log.error("Init yaml failed !", e);

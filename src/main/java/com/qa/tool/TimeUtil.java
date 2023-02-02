@@ -1,4 +1,4 @@
-package com.qa.tools;
+package com.qa.tool;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -11,7 +11,7 @@ import java.util.Random;
  * @date 2022/11/24 16:41
  * 描述 时间工具类
  */
-public class TimeUtils {
+public class TimeUtil {
 
     /**
      * 月日时分秒补0
@@ -83,9 +83,19 @@ public class TimeUtils {
      * 获取当前时间
      * 格式为：yyyy-MM-dd
      * */
-    public static String currentTime() {
+    public static String currentTimeStyle01() {
         Date date = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        return formater.format(date);
+    }
+
+    /**
+     * 获取当前时间
+     * 格式为：yyyyMMdd
+     * */
+    public static String currentTimeStyle02() {
+        Date date = new Date();
+        SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
         return formater.format(date);
     }
 
@@ -93,7 +103,7 @@ public class TimeUtils {
      * 获取当前时间戳
      * 格式为：1479249799770
      * */
-    public static String currentTimeStamp() {
+    public static String currentDateTimeStamp() {
         SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return formater.format(timestamp);
@@ -103,7 +113,7 @@ public class TimeUtils {
      * 获取上月的任意时间
      * 格式为：yyyy-MM-dd
      * */
-    public static String lastMonth() {
+    public static String lastMonthRandomDate() {
         Date date = new Date();
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();

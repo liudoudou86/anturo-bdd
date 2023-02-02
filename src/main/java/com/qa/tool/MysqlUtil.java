@@ -1,4 +1,4 @@
-package com.qa.tools;
+package com.qa.tool;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -10,7 +10,7 @@ import java.sql.*;
  * @date 2022/11/07 14:13
  * 描述 JDBC工具类
  */
-public class MysqlUtils {
+public class MysqlUtil {
     public static Connection conn = null;
     public static PreparedStatement statement = null;
     public static ResultSet resultSet = null;
@@ -27,10 +27,10 @@ public class MysqlUtils {
     public static Connection getConnection(String propertiesName){
         Connection connection = null;
         try {
-            driver = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".driver"));
-            url = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".url"));
-            user = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".username"));
-            pwd = String.valueOf(YamlUtils.INSTANCE.getValueByKey(propertiesName + ".password"));
+            driver = String.valueOf(YamlUtil.INSTANCE.getValueByKey(propertiesName + ".driver"));
+            url = String.valueOf(YamlUtil.INSTANCE.getValueByKey(propertiesName + ".url"));
+            user = String.valueOf(YamlUtil.INSTANCE.getValueByKey(propertiesName + ".username"));
+            pwd = String.valueOf(YamlUtil.INSTANCE.getValueByKey(propertiesName + ".password"));
             // 加载驱动
             Class.forName(driver);
             connection = DriverManager.getConnection(url, user, pwd);
@@ -102,7 +102,7 @@ public class MysqlUtils {
      * @param sqlpath sql脚本路径
      */
     public static void sqlScript(String propertiesName, String sqlpath) {
-        Connection conn = MysqlUtils.getConnection(propertiesName);
+        Connection conn = MysqlUtil.getConnection(propertiesName);
         ScriptRunner runner = new ScriptRunner(conn);
         try {
             runner.runScript(Resources.getResourceAsReader(sqlpath));
