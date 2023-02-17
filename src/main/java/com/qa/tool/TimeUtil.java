@@ -1,6 +1,5 @@
 package com.qa.tool;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,13 +99,22 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当前时间戳
-     * 格式为：1479249799770
+     * 获取当前时间
+     * 格式为：yyyyMMddHHmm
      * */
-    public static String currentDateTimeStamp() {
-        SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        return formater.format(timestamp);
+    public static String currentTimeStyle03() {
+        Date date = new Date();
+        SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmm");
+        return formater.format(date);
+    }
+
+    /**
+     * 获取当前时间
+     * 格式为：yyyyMMddHHmm
+     * */
+    public static String currentTimeStamp() {
+        String date = String.valueOf(System.currentTimeMillis());
+        return date;
     }
 
     /**
