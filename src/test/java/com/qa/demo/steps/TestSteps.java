@@ -20,8 +20,10 @@ public class TestSteps implements En {
     }
 
     public void testcase() {
-        Given("访问百度一下网站",()-> log.info("登录百度一下"));
-        When("输入搜索词",()-> log.info("输入BDD"));
-        Then("应该可以看到搜索词",()-> log.info("可以看到BDD"));
+        Given("前提条件",()-> {
+            log.info("前提条件");
+        });
+        When("当时输入条件时",()-> log.info("当时输入条件时"));
+        Then("应该得到的结果",()-> log.info("应该得到的结果"));
     }
 }

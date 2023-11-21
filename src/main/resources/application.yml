@@ -1,0 +1,21 @@
+DataBase:
+    Credit:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/user?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+        username:
+        password:
+    B2B:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/user?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+        username:
+        password:
+Address:
+    B2B:
+    Credit:
+Account:
+    FrontStage:
+        username:
+        password:
+    BackStage:
+        username:
+        password:

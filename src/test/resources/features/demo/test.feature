@@ -1,7 +1,7 @@
-Feature:百度搜索
+Feature:测试功能概述
 
   @test
-  Scenario:百度搜索测试
-    Given 访问百度一下网站
-    When 输入搜索词
-    Then 应该可以看到搜索词
+  Scenario:测试目的及简介
+    Given 前提条件
+    When 当时输入条件时
+    Then 应该得到的结果

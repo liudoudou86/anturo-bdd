@@ -1,4 +1,4 @@
-image: harbor.dtyunxi.cn/library/yunxicibase:0.3.0
+image:
 
 stages:
   - test
@@ -8,7 +8,7 @@ bdd-test:
   stage: test
   script:
     - echo "starting bdd test"
-    - mvn clean post-integration-test -f pom.xml -U -P test-bdd
+    - mvn clean verify
   only:
     - master
   allow_failure: true

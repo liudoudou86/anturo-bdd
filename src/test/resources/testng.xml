@@ -2,9 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestSuite" verbose="1">
     <test name="TestSuite" verbose="2">
-        <classes>
-            <class name="com.qa.demo.runner.TestRunner">
-            </class>
-        </classes>
+        <packages>
+            <package name="com.qa.demo.runner.TestRunner"></package>
+            <package name="com.qa.order.OrderDeliver"></package>
+        </packages>
     </test>
 </suite>

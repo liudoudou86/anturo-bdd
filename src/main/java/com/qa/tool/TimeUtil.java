@@ -102,16 +102,6 @@ public class TimeUtil {
      * 获取当前时间
      * 格式为：yyyyMMddHHmm
      * */
-    public static String currentTimeStyle03() {
-        Date date = new Date();
-        SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmm");
-        return formater.format(date);
-    }
-
-    /**
-     * 获取当前时间
-     * 格式为：yyyyMMddHHmm
-     * */
     public static String currentTimeStamp() {
         String date = String.valueOf(System.currentTimeMillis());
         return date;

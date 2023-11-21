@@ -24,7 +24,7 @@ public class YamlUtil {
 
     static {
         Yaml yaml = new Yaml();
-        try (InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream("applicationConfig.yaml")) {
+        try (InputStream in = YamlUtil.class.getClassLoader().getResourceAsStream("application.yml")) {
             properties = yaml.loadAs(in, HashMap.class);
         } catch (Exception e) {
             log.error("Init yaml failed !", e);
