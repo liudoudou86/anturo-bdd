@@ -1,14 +1,93 @@
-image: harbor.dtyunxi.cn/library/yunxicibase:0.3.0
+image: 
 
 stages:
-  - test
+  - api
+  - bdd
+
+variables:
+  # Debug测试群
+  DING_TOKEN: 
+  DING_SECRET: 
+  AUTOMATION_PROJECT: 
+  AUTOMATION_ENVIRONMENT: STG
+  ALLURE_HOST: 
+  ALLURE_PORT: 
+  ALLURE_ENDPOINT: /allure
+  ALLURE_RESULT: target/allure-results
+  ALLURE_REPORT: $CI_PROJECT_DIR/target/site/allure-maven-plugin
+  SERENITY_HOST: 
+  SERENITY_PORT: 
+  SERENITY_ENDPOINT: /bdd?id=$CI_PIPELINE_ID
+  SERENITY_REPORT: $CI_PROJECT_DIR/target/site/serenity
+
+cache: &global_cache
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - ${ALLURE_RESULT}
+  untracked: false
+  policy: pull-push
+
+api-test:
+  when: manual
+  stage: api
+  variables:
+    TARPATH: /automation
+    TARFILE: e2e-api-automation-report.tar.gz
+  script:
+    - echo "starting api test"
+    - mvn clean integration-test -f pom.xml -U -P e2e-api
+    - cat target/site/jacoco/index.html
+    - echo -e "AUTOMATION_ENVIRONMENT=${AUTOMATION_ENVIRONMENT}\nAUTOMATION_PIPELINE_ID=${CI_PIPELINE_ID}" > ${ALLURE_RESULT}/environment.properties
+    - ls -l ${ALLURE_RESULT} | grep environment.properties
+    - mvn allure:report -P e2e-api
+    - ls -l ${ALLURE_REPORT}
+    - mkdir -p ${TARPATH} && chmod -R 777 ${TARPATH} && ls -l ${TARPATH}
+    - tar -czvf ${TARPATH}/${TARFILE} ${ALLURE_REPORT}
+    - ls -l ${TARPATH}
+    - curl -v -X POST http://${ALLURE_HOST}:${ALLURE_PORT}/upload -F "filename=@${TARPATH}/${TARFILE}"
+    - mvn dingding:command-notify -DdingToken=$DING_TOKEN -DdingSecret=$DING_SECRET -DautomationTitle="API-Automation Regression" -DautomationProject=$AUTOMATION_PROJECT -DautomationEnvironment=$AUTOMATION_ENVIRONMENT -DreportHost=$ALLURE_HOST -DreportPort=$ALLURE_PORT -DreportRoute=$ALLURE_ENDPOINT -DtraceInfo.testProject=$CI_PROJECT_NAME -DtraceInfo.pipelineId=$CI_PIPELINE_ID -DtraceInfo.destProject=$CI_PROJECT_NAME -DtraceInfo.commitRef=$CI_COMMIT_REF_NAME -DtraceInfo.commitSha=$CI_COMMIT_SHA -DtraceInfo.commitTitle=$CI_COMMIT_TITLE -DtraceInfo.commitUser=$GITLAB_USER_EMAIL -DtraceInfo.commitTime=$CI_COMMIT_TIMESTAMP -P e2e-api
+  only:
+    - master
+  except:
+    - develop
+  allow_failure: true
+  artifacts:
+    name: allure-report
+    paths:
+      - target/site/allure-maven-plugin
+    expire_in: 8 hrs 30 min
+    when: always
+    untracked: false
+  cache: { }
+  coverage: '/Total.*?([0-9]{1,3})%/'
 
 bdd-test:
   when: always
-  stage: test
+  stage: bdd
+  variables:
+    TARPATH: /automation
+    TARFILE: bdd-automation-report-$CI_PIPELINE_ID.tar.gz
   script:
     - echo "starting bdd test"
-    - mvn clean post-integration-test -f pom.xml -U -P test-bdd
+    - mvn clean post-integration-test -f pom.xml -U -P e2e-bdd
+    - cat target/site/jacoco/index.html
+    - ls -l ${SERENITY_REPORT} | grep index.html
+    - mkdir -p ${TARPATH} && chmod -R 777 ${TARPATH} && ls -l ${TARPATH}
+    - tar -czvf ${TARPATH}/${TARFILE} ${SERENITY_REPORT}
+    - ls -l ${TARPATH}
+    - curl -v -X POST http://${SERENITY_HOST}:${SERENITY_PORT}/upload -F "filename=@${TARPATH}/${TARFILE}"
+    - mvn dingding:command-notify -DdingToken=$DING_TOKEN -DdingSecret=$DING_SECRET -DautomationTitle="BDD-Automation Regression" -DautomationProject=$AUTOMATION_PROJECT -DautomationEnvironment=$AUTOMATION_ENVIRONMENT -DreportHost=$SERENITY_HOST -DreportPort=$SERENITY_PORT -DreportRoute=$SERENITY_ENDPOINT -DtraceInfo.testProject=$CI_PROJECT_NAME -DtraceInfo.pipelineId=$CI_PIPELINE_ID -DtraceInfo.destProject=$CI_PROJECT_NAME -DtraceInfo.commitRef=$CI_COMMIT_REF_NAME -DtraceInfo.commitSha=$CI_COMMIT_SHA -DtraceInfo.commitTitle=$CI_COMMIT_TITLE -DtraceInfo.commitUser=$GITLAB_USER_EMAIL -DtraceInfo.commitTime=$CI_COMMIT_TIMESTAMP -P e2e-bdd
   only:
     - master
-  allow_failure: true
+  except:
+    - develop
+  allow_failure: false
+  artifacts:
+    name: bdd-report
+    paths:
+      - target/site/serenity
+    expire_in: 8 hrs 30 min
+    when: always
+    untracked: false
+  cache: { }
+  coverage: '/Total.*?([0-9]{1,3})%/'
