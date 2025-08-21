@@ -1,0 +1,92 @@
+bdd:
+  profile:
+    current: stg
+api:
+  order-center:
+    protocal: http
+    host: 
+    port: 
+  rebate-center:
+    protocal: http
+    host: 
+    port: 
+  credit-center:
+    protocal: http
+    host: 
+    port: 
+  finance-center:
+    protocal: http
+    host: 
+    port: 
+  finance-intergration:
+    protocal: http
+    host: 
+    port: 
+  channel-center:
+    protocal: http
+    host: 
+    port:  
+  medicine-mgmt:
+    protocal: http
+    host: 
+    port: 
+  b2b-server:
+    protocal: http
+    host: 
+    port: 
+mysql:
+  order-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+  rebate-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+  credit-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+  finance-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+  price-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+  item-center:
+    host: 
+    port: 
+    database: 
+    username: 
+    password: 
+redis:
+  center:
+    host: 
+    port: 
+    db: 0
+    Max_Active: 10
+    Max_Idle: 10
+    Max_Wait: 60000
+    Test_On_Barrow: false
+    auth_password: 
+  qa:
+    host: 
+    port: 
+    db: 0
+    Max_Active: 10
+    Max_Idle: 10
+    Max_Wait: 60000
+    Test_On_Barrow: false
+    auth_password: 
