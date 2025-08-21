@@ -10,7 +10,6 @@
 
 * **开发语言**：*Java8*
 * **开发工具**：*IntelliJ IDEA*
-* **开发框架**：[Hammler-BDD](http://idp-gitlab.anturo.com/qa/automation/frameworks/hammler-bdd)
 * **测试相关**：
     * 测试用例：*Gherkin*
     * 测试框架：*Cucumber*、*Serenity*

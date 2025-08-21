@@ -170,8 +170,8 @@ Feature: 创建订单提交校验逻辑
       | PT02                     | 10000265    | 1        | 6         | 1           | 5                | 1        | 2        | 12          | 2                | 0.56               | 9.44       | Detail_001 |
 
     Examples: 基础信息
-      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName      | shippingRecipient | shippingTelephone | shippingAddress |
-      | 1017           | 340000     | 0010000262      | 天津大区       | 天津市海王星辰健康药房连锁有限公司 |                   |                   |                 |
+      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName | shippingRecipient | shippingTelephone | shippingAddress |
+      | 1017           | 340000     | 0010000262      | 天津大区       | 天津****有限公司   |                   |                   |                 |
 
   @orderCommitVerify04
   Scenario Outline: [场景04]创建订单时，收货地址为空，提交订单校验提示拦截，提示错误信息
@@ -226,8 +226,8 @@ Feature: 创建订单提交校验逻辑
       | PT02                     | 10000265    | 1        | 6         | 1           | 5                | 1        | 2        | 12          | 2                | 0.56               | 9.44       | Detail_001 |
 
     Examples: 基础信息
-      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName      | shippingRecipient | shippingTelephone | shippingAddress |
-      | 1017           | 340000     | 0010000262      | 天津大区       | 天津市海王星辰健康药房连锁有限公司 | 王伟升               | 18658822626       |                 |
+      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName | shippingRecipient | shippingTelephone | shippingAddress |
+      | 1017           | 340000     | 0010000262      | 天津大区       | 天津****有限公司   | 王伟升               | 18658822626       |                 |
 
   @orderCommitVerify05
   Scenario Outline: [场景05]创建订单时，收货人为空，提交订单校验提示拦截，提示错误信息
@@ -282,8 +282,8 @@ Feature: 创建订单提交校验逻辑
       | PT02                     | 10000265    | 1        | 6         | 1           | 5                | 1        | 2        | 12          | 2                | 0.56               | 9.44       | Detail_001 |
 
     Examples: 基础信息
-      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName      | shippingRecipient | shippingTelephone | shippingAddress                |
-      | 1017           | 340000     | 0010000262      | 天津大区       | 天津市海王星辰健康药房连锁有限公司 |                   | 18658822626       | 天津市东丽区大毕庄镇跃进路西侧天津市物流货运中心金钟物流园内 |
+      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName | shippingRecipient | shippingTelephone | shippingAddress |
+
 
   @orderCommitVerify06
   Scenario Outline: [场景06]创建订单时，联系方式为空，提交订单校验提示拦截，提示错误信息
@@ -338,8 +338,7 @@ Feature: 创建订单提交校验逻辑
       | PT02                     | 10000265    | 1        | 6         | 1           | 5                | 1        | 2        | 12          | 2                | 0.56               | 9.44       | Detail_001 |
 
     Examples: 基础信息
-      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName      | shippingRecipient | shippingTelephone | shippingAddress                |
-      | 1017           | 340000     | 0010000262      | 天津大区       | 天津市海王星辰健康药房连锁有限公司 | 王伟升               |                   | 天津市东丽区大毕庄镇跃进路西侧天津市物流货运中心金钟物流园内 |
+      | saleOrgSapCode | regionCode | customerSapCode | regionName | customerName | shippingRecipient | shippingTelephone | shippingAddress |
 
   @orderCommitVerify07
   Scenario Outline: [场景07]创建订单时，商品数量为空，创建订单失败，提示错误信息
@@ -721,8 +720,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验13]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 46                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 46                      | NORMAL                 |
     Then [创建订单提交校验13]创建订单应校验失败且提示错误信息
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark |
       | PT00                     | 10000841    | 1        | 10        | 5        | 10          | 8                | 0        | 50          | 10               | 0                  | 40         |        |
@@ -888,8 +887,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000265    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验16]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 48                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 48                      | NORMAL                 |
     Then [创建订单提交校验16]创建订单应校验失败且提示错误信息
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark     |
       | PT00                     | 10000841    | 1        | 10        | 30       | 2           | 8                | 1        | 300         | 60               | 13.58              | 226.42     |            |
@@ -946,8 +945,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000265    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验17]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 0                       | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 0                       | NORMAL                 |
     Then [创建订单提交校验17]创建订单应校验失败且提示错误信息
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark     |
       | PT00                     | 10000841    | 1        | 10        | 30       | 2           | 8                | 1        | 300         | 60               | 13.58              | 226.42     |            |
@@ -1857,8 +1856,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验34]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 45                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 45                      | NORMAL                 |
     Then [创建订单提交校验34]创建订单提交校验通过
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark |
       | PT00                     | 10000841    | 1        | 10        | 5        | 10          | 8                | 0        | 50          | 10               | 0                  | 40         |        |
@@ -1973,8 +1972,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验36]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 46                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 46                      | NORMAL                 |
     Then [创建订单提交校验36]创建订单应校验失败且提示错误信息
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark |
       | PT00                     | 10000841    | 1        | 10        | 2        | 4           | 8                | 0        | 20          | 4                | 0                  | 16         |        |
@@ -2146,8 +2145,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验39]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 45                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 45                      | NORMAL                 |
     Then [创建订单提交校验39]创建订单提交校验通过
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark |
       | PT00                     | 10000841    | 1        | 10        | 2        | 2           | 8                | 0        | 20          | 4                | 0                  | 16         |        |
@@ -2262,8 +2261,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验41]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 41                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 41                      | NORMAL                 |
     Then [创建订单提交校验41]创建订单应校验失败且提示错误信息
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark     |
       | PT00                     | 10000841    | 1        | 10        | 2        | 2           | 8                | 0        | 20          | 4                | 1.6                | 14.4       |            |
@@ -2379,8 +2378,8 @@ Feature: 创建订单提交校验逻辑
       | itemSapCode | saleOrgSapCode   | regionCode | saleOrgEffectiveState | permittedSaleQuantityRegion | regionEffectiveState | hasSaleQuantityUnits | customerEntZtCode | customerEntSapCode | customerEntCrmCode | type  | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState | unitCode | unitName |
       | 10000841    | <saleOrgSapCode> | 340000     | ENABLE                | 200                         | ENABLE               | 0                    |                   |                    |                    | SHARE | 大区共享         | 150                           | 0                       | NORMAL                 | HE       | 盒        |
     And [创建订单提交校验43]当前存在如下的商品一级商允销信息
-      | customerSapCode   | type                 | customerName      | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
-      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津市海王星辰健康药房连锁有限公司 | 50                            | 40                      | NORMAL                 |
+      | customerSapCode   | type                 | customerName | permittedSaleQuantityCustomer | hasSaleQuantityCustomer | customerEffectiveState |
+      | <customerSapCode> | FIRST_LEVEL_CUSTOMER | 天津****有限公司   | 50                            | 40                      | NORMAL                 |
     Then [创建订单提交校验43]创建订单提交校验通过
       | orderWideDiscountSubject | itemSapCode | needShip | unitPrice | quantity | preDiscount | calculationValue | boxRatio | totalInline | preDiscountTotal | orderDiscountTotal | realInline | remark     |
       | PT00                     | 10000841    | 1        | 10        | 2        | 2           | 8                | 0        | 20          | 4                | 1.6                | 14.4       |            |
